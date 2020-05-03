@@ -16,7 +16,6 @@ module.exports = function(injectedStore){
             name: body.name,
             username: body.username
         }
-        console.log('upset in controller user' + body);
         if (body.id){
             user.id = body.id;
         }else{

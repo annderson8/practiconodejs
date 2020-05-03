@@ -19,7 +19,6 @@ function list(req, res){
         });
 }
 function get (req, res)  {
-    console.log('get in network user ' + req.params);
     Controller.get(req.params.id)
         .then((user) =>{
             response.success(req, res, user, 200);
@@ -30,7 +29,6 @@ function get (req, res)  {
 }
 
 function upsert(req, res){
-    console.log('upsert in network user ' + req.body);
     Controller.upsert(req.body)
         .then((user) =>{
             response.success(req, res, user, 200);
