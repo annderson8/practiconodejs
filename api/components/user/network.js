@@ -6,7 +6,7 @@ const router =  express.Router();
 router.get('/', list);
 router.get('/:id', get);
 router.post('/', upsert);
-// router.put('/', upsert);
+router.put('/', upsert);
 
 function list(req, res){
     console.log('list in network user ' + req);
