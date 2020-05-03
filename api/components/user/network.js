@@ -6,9 +6,10 @@ const router =  express.Router();
 router.get('/', list);
 router.get('/:id', get);
 router.post('/', upsert);
-router.put('/', upsert);
+// router.put('/', upsert);
 
 function list(req, res){
+    console.log('list in network user ' + req);
     Controller.list()
         .then((lista) =>{
             response.success(req, res, lista, 200);
@@ -18,6 +19,7 @@ function list(req, res){
         });
 }
 function get (req, res)  {
+    console.log('get in network user ' + req.params);
     Controller.get(req.params.id)
         .then((user) =>{
             response.success(req, res, user, 200);
@@ -28,13 +30,14 @@ function get (req, res)  {
 }
 
 function upsert(req, res){
+    console.log('upsert in network user ' + req.body);
     Controller.upsert(req.body)
-    .then((user) =>{
-        response.success(req, res, user, 200);
-    })
-    .catch((err) => {
-        response.error(req, res, err.message, 500);
-    });
+        .then((user) =>{
+            response.success(req, res, user, 200);
+        })
+        .catch((err) => {
+            response.error(req, res, err.message, 500);
+        });
 }
 
 
