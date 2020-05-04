@@ -1,4 +1,5 @@
 const express = require('express');
+const secure = require('./secure');
 const response = require('../../../network/response');
 const Controller = require('./index');
 
@@ -6,7 +7,7 @@ const router =  express.Router();
 router.get('/', list);
 router.get('/:id', get);
 router.post('/', upsert);
-router.put('/', upsert);
+router.put('/', secure('update'), upsert);
 
 function list(req, res){
     console.log('list in network user ' + req);
