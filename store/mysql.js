@@ -42,27 +42,68 @@ function list(tabla){
         })
     })
 }
-async function get(tabla, id){
-    let col = await list(tabla)
-    return col.filter(item => item.id === id)[0] || null;
+function get(tabla, id){
+    return new Promise((resolve, reject) =>{
+        connection.query(`SELECT * FROM ${tabla} WHERE id=${id}`,(error, data) => {
+            if(error) return reject(error);
+            resolve(data);
+        })
+    })
 }
-async function upsert(tabla, data){
-    if (!db[tabla]){
-        db[tabla] = [];
-    }
-    db[tabla].push(data);
-    console.log(db);
+
+function insert(tabla, data){
+    console.log(tabla);
+    return new Promise((resolve, reject) =>{
+        connection.query(`INSERT INTO ${tabla} SET ?`, data ,(error, result) => {
+            if(error) return reject(error);
+            resolve(result);
+        });
+    });
 }
+function update(tabla, data){
+    return new Promise((resolve, reject) =>{
+        connection.query(`UPDATE ${tabla} SET ? WHERE id=?`,[data, data.id]  ,(error, result) => {
+            if(error) return reject(error);
+            resolve(result);
+        });
+    });
+}
+// async function upsert(table, data){
+//     console.log('Insertando');
+//     const result = await get('user', data.id);
+//     console.log('Insertando' + result.length);
+//     if(result.length < 1 ) {
+//         return insert(table, data);
+//     } else {
+//         return update(table, data);
+//     }
+// }
+
+async function upsert(table, data){
+    return new Promise ((resolve, reject) =>{
+        connection.query(`INSERT INTO ${table} SET ? ON DUPLICATE KEY UPDATE ?`, [data, data], (error, data) => {
+            if(error) {
+                return reject(error);
+            }
+            resolve(data);
+        })        
+    })
+}
+
 async function remove(tabla, id){
     let col = await list(tabla)
     return true;
 }
 
-async function query(tabla, q){
-    let col = await list(tabla)
-    let keys = Object.keys(q);
-    let key = keys[0];
-    return col.filter(item => item[key] === q[key])[0] || null;
+function query(tabla, query){
+    return new Promise((resolve, reject) =>{
+        connection.query(`SELECT * FROM ${tabla} WHERE ?`, query, (error, result) => {
+            if(error) return reject(error);
+            result = JSON.stringify(result[0])
+            result = JSON.parse(result)
+            resolve(result || null);
+        });
+    });
 }
 
 module.exports = {
