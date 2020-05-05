@@ -24,6 +24,9 @@ function verify(token){
             throw error('No puedes  realizar esto', 401);
         }
      },
+     logged: function(req, owner){
+        const decoded = decodeHeader(req);
+     },
 
  } 
 

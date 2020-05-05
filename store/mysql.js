@@ -69,14 +69,7 @@ function update(tabla, data){
     });
 }
 // async function upsert(table, data){
-//     console.log('Insertando');
-//     const result = await get('user', data.id);
-//     console.log('Insertando' + result.length);
-//     if(result.length < 1 ) {
-//         return insert(table, data);
-//     } else {
-//         return update(table, data);
-//     }
+//   
 // }
 
 async function upsert(table, data){
@@ -94,10 +87,15 @@ async function remove(tabla, id){
     let col = await list(tabla)
     return true;
 }
-
-function query(tabla, query){
-    return new Promise((resolve, reject) =>{
-        connection.query(`SELECT * FROM ${tabla} WHERE ?`, query, (error, result) => {
+function query(table, query, join) {
+        let joinQuery = '';
+        if (join) {
+            const key = Object.keys(join)[0];
+            const val = join[key];
+            joinQuery = `JOIN ${key} ON ${table}.${val} = ${key}.id`;
+        }    
+        return new Promise((resolve, reject) =>{
+            connection.query(`SELECT * FROM ${table} ${joinQuery} WHERE ${table}.?`, query, (error, result) => {
             if(error) return reject(error);
             result = JSON.stringify(result[0])
             result = JSON.parse(result)

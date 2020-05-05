@@ -7,9 +7,9 @@ module.exports = {
     },
 
     mysql: {
-        host: process.env.MYSQL_HOST || 'db4free.net',
-        user: process.env.MYSQL_USER || 'userplatzinodejs',
-        password: process.env.MYSQL_PASS || 'YZpPfdG3qY..M5$',
-        database: process.env.MYSQL_DB || 'platzinodejs'
+        host: process.env.MYSQL_HOST || 'localhost',
+        user: process.env.MYSQL_USER || 'root',
+        password: process.env.MYSQL_PASS || 'root',
+        database: process.env.MYSQL_DB || 'platzinode'
     },
 }
