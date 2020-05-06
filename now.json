@@ -3,11 +3,11 @@
     "builds": [
         {
         "src": "api/index.js",
-        "user": "@now/node"
+        "use": "@now/node"
         },
         {
         "src": "post/index.js",
-        "user": "@now/node"
+        "use": "@now/node"
         }
     ],
     "routes": [
