@@ -34,35 +34,35 @@ function handleCon () {
 
 handleCon();
 
-function list(tabla){
+function list(table){
     return new Promise((resolve, reject) =>{
-        connection.query(`SELECT * FROM ${tabla}`,(error, data) => {
+        connection.query(`SELECT * FROM ${table}`,(error, data) => {
             if(error) return reject(error);
             resolve(data);
         })
     })
 }
-function get(tabla, id){
+function get(table, id){
     return new Promise((resolve, reject) =>{
-        connection.query(`SELECT * FROM ${tabla} WHERE id=${id}`,(error, data) => {
+        connection.query(`SELECT * FROM ${table} WHERE id=${id}`,(error, data) => {
             if(error) return reject(error);
             resolve(data);
         })
     })
 }
 
-function insert(tabla, data){
-    console.log(tabla);
+function insert(table, data){
+    console.log(table);
     return new Promise((resolve, reject) =>{
-        connection.query(`INSERT INTO ${tabla} SET ?`, data ,(error, result) => {
+        connection.query(`INSERT INTO ${table} SET ?`, data ,(error, result) => {
             if(error) return reject(error);
             resolve(result);
         });
     });
 }
-function update(tabla, data){
+function update(table, data){
     return new Promise((resolve, reject) =>{
-        connection.query(`UPDATE ${tabla} SET ? WHERE id=?`,[data, data.id]  ,(error, result) => {
+        connection.query(`UPDATE ${table} SET ? WHERE id=?`,[data, data.id]  ,(error, result) => {
             if(error) return reject(error);
             resolve(result);
         });
@@ -83,8 +83,8 @@ async function upsert(table, data){
     })
 }
 
-async function remove(tabla, id){
-    let col = await list(tabla)
+async function remove(table, id){
+    let col = await list(table)
     return true;
 }
 function query(table, query, join) {

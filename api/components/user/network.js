@@ -12,9 +12,8 @@ router.post('/', upsert);
 router.put('/', secure('update'), upsert);
 
 function list(req, res, next){
-    console.log('list in network user ' + req);
     Controller.list()
-        .then((lista) =>{
+        .then(lista =>{
             response.success(req, res, lista, 200);
         })
         .catch(next);

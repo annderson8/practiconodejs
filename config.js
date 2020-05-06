@@ -12,4 +12,13 @@ module.exports = {
         password: process.env.MYSQL_PASS || 'root',
         database: process.env.MYSQL_DB || 'platzinode'
     },
+    mysqlService: {
+        port: process.env.MYSQL_SERVICE_PORT || 3001,
+        host: process.env.MYSQL_SERVICE_HOST || 'localhost',
+
+
+    },
+    post: {
+        port: process.env.POST_PORT || 3002,
+    }
 }

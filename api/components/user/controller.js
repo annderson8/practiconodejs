@@ -4,6 +4,7 @@ const TABLA = 'user';
 
 module.exports = function(injectedStore){
     let store = injectedStore;
+    console.log('Store: ' + store);
     if (!store)store = require('../../../store/mysql');
     function list (){
         return store.list(TABLA);

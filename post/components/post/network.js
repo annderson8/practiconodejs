@@ -14,7 +14,6 @@ router.post('/:id/like', secure('add'), like);
 router.get('/:id/like', secure('list'), postLikers)
 
 function list(req, res, next){
-    console.log('list in network user ' + req);
     Controller.list()
         .then(data =>{
             response.success(req, res, data, 200);
