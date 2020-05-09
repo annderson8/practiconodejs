@@ -7,3 +7,4 @@
 
 *.webp
 **/*.webp
+.vercel
