@@ -19,6 +19,18 @@ module.exports = {
 
 
     },
+    redis:{
+        host: process.env.REDIS_HOST || 'redis-15654.c93.us-east-1-3.ec2.cloud.redislabs.com',
+        port: process.env.REDIS_USER || 15654,
+        password: process.env.REDIS_PASS || 'qkwt7zdGrUeDMARAKXhWAcwTOfOKWevs',
+    },
+
+    cacheService: {
+        port: process.env.CACHE_SERVICE_PORT || 3003,
+        host: process.env.CACHE_SERVICE_HOST || 'localhost',
+
+
+    },
     post: {
         port: process.env.POST_PORT || 3002,
     }
